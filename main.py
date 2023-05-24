@@ -2,12 +2,10 @@ import numpy as np
 import thinkdsp
 import cv2
 import thinkplot
-from PIL import Image
 
 
 class ImageToSoundConverter:
     def __init__(self, image_path):
-
         self.image_path = image_path
         self.image = None
         self.pixels = None
@@ -16,9 +14,6 @@ class ImageToSoundConverter:
 
     def read_image(self):
         self.image = cv2.imread(self.image_path)
-        # Convert to grayscale
-        if self.image is not None:
-            self.pixels = np.mean(self.image, axis=2)
 
     def grayscale_image(self):
         if self.image is not None:
@@ -63,14 +58,9 @@ if __name__ == "__main__":
     image_to_sound = ImageToSoundConverter("./Images/samoyed-few-colors.jpg")
     image_to_sound.read_image()
     image_to_sound.grayscale_image()
-    #print(image_to_sound.image)
     image_to_sound.show_image()
     image_to_sound.show_grayscaled_image()
     image_to_sound.to_wave()
     image_to_sound.create_spectrum()
     image_to_sound.plot_spectrum()
     image_to_sound.create_sound("./Sounds/sound.wave")
-    print(type(image_to_sound.wave))
-
-
-
